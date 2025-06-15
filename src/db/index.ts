@@ -15,7 +15,7 @@ const schema = {
 
 // Configuring Neon for local development
 if (config.env.NODE_ENV === 'development') {
-  connectionString = 'postgres://postgres:postgres@db.localtest.me:5432/socoalai';
+  connectionString = 'postgres://postgres:postgres@db.localtest.me:5432/socialai';
   neonConfig.fetchEndpoint = (host) => {
     const [protocol, port] = host === 'db.localtest.me' ? ['http', 4444] : ['https', 443];
     return `${protocol}://${host}:${port}/sql`;
