@@ -45,13 +45,3 @@ export const verification = pgTable("verification", {
   createdAt: timestamp('created_at').$defaultFn(() => /* @__PURE__ */ new Date()),
   updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date())
 });
-
-export const user = pgTable("user", {
-  id: text('id').primaryKey(),
-  email: text('email').notNull().unique(),
-  emailVerified: timestamp('email_verified'),
-  name: text('name'),
-  image: text('image'),
-  createdAt: timestamp('created_at').$defaultFn(() => /* @__PURE__ */ new Date()).notNull(),
-  updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date()).notNull()
-});
