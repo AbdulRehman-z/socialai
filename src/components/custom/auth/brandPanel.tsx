@@ -122,7 +122,7 @@ const BrandPanel = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-white"
         >
-          <h2 className="text-3xl font-bold mb-4">AI assistants to counsel you.</h2>
+          <h2 className="text-3xl font-bold mb-4">AI assistants to counsel you</h2>
           <p className="text-blue-100 text-lg mb-8 max-w-md">
             Everything you need in an easily customizable dashboard.
           </p>
