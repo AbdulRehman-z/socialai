@@ -15,6 +15,6 @@ export const config = {
       QSTASH_URL: process.env.QSTASH_URL!,
       QSTASH_TOKEN: process.env.QSTASH_TOKEN!,
     },
-    RESEND_TOKEN: process.env.RESEND_TOKEN!,
+    RESEND_API_KEY: process.env.RESEND_API_KEY!,
   },
 };
