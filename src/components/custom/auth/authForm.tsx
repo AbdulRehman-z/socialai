@@ -65,8 +65,8 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
     if (result.success) {
       toast("Success!", {
         description: isSignedIn
-          ? "Welcome back! You've successfully signed in."
-          : "Account created! Welcome to SOCIALAI.",
+          ? "Welcome back! You've successfully signed in"
+          : "Account created! Welcome to SOCIALAI",
       })
 
       if (isSignedIn) {
@@ -109,7 +109,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
             <p className="text-gray-600">
               {isSignedIn
                 ? "Welcome back! Select method to log in:"
-                : "Welcome! Please fill in the details to get started."}
+                : "Welcome! Please fill in the details to get started"}
             </p>
           </div>
 
@@ -159,28 +159,10 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
                           <div className="absolute left-3 top-1/2 -translate-y-1/2">{getFieldIcon(formField.name)}</div>
                           <Input
                             {...formField}
-                            type={
-                              (formField.name === "password" || formField.name === "confirmPassword") &&
-                                !showPassword[formField.name]
-                                ? "password"
-                                : FIELD_TYPES[formField.name as keyof typeof FIELD_TYPES]
-                            }
+                            type={FIELD_TYPES[formField.name as keyof typeof FIELD_TYPES]}
                             placeholder={FIELD_NAMES[formField.name as keyof typeof FIELD_NAMES]}
                             className="pl-10 pr-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                           />
-                          {(formField.name === "password" || formField.name === "confirmPassword") && (
-                            <button
-                              type="button"
-                              onClick={() => togglePasswordVisibility(formField.name)}
-                              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                            >
-                              {showPassword[formField.name] ? (
-                                <EyeOff className="w-5 h-5" />
-                              ) : (
-                                <Eye className="w-5 h-5" />
-                              )}
-                            </button>
-                          )}
                         </div>
                       </FormControl>
                       <FormMessage className="text-red-500 text-sm" />
@@ -205,7 +187,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
               <Button
                 type="submit"
                 disabled={pending}
-                className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium"
+                className="w-full h-12 mt-4"
               >
                 {pending ? "Processing..." : isSignedIn ? "Log In" : "Create Account"}
               </Button>
@@ -227,8 +209,6 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
         </div>
       </div>
 
-      {/* Right Panel - Brand */}
-      {/* <BrandPanel /> */}
     </div>
   )
 }
