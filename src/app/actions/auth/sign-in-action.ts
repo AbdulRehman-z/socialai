@@ -2,7 +2,6 @@
 
 import { auth } from "@/lib/auth";
 import { signinSchema } from "@/lib/validations";
-import { BetterAuthError } from "better-auth";
 import { APIError } from "better-auth/api";
 import { z } from "zod";
 
@@ -31,14 +30,23 @@ export const signinAction = async (formData: z.infer<typeof signinSchema>) => {
       success: true,
       message: "Signed in successfully"
     }
+
   } catch (error) {
-    if (error instanceof APIError || error instanceof BetterAuthError) {
-      console.error(error)
-      return {
-        success: false,
-        error: error.message
+    if (error instanceof APIError) {
+      switch (error.statusCode) {
+        case 403:
+          return {
+            success: false,
+            error: "Email not verified. A verification email has been sent to your email address."
+          }
+        case 401:
+          return {
+            success: false,
+            error: error.message
+          }
       }
     }
+
     return {
       success: false,
       error: "An unexpected error occurred"
