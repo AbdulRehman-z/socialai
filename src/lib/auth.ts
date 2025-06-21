@@ -17,19 +17,17 @@ export const auth = betterAuth({
   appName: "Socialai",
   emailVerification: {
     autoSignInAfterVerification: false,
-    expiresIn: 5 * 60,
+    expiresIn: 60 * 60, // 60 minutes
     sendOnSignUp: true,
     sendVerificationEmail: async ({ url, user, token }) => {
       const addressUrl = new URL(url)
       addressUrl.searchParams.set("callbackURL", "/verify")
-      await resend.emails.send({
-        from: 'Socialai <onboarding@resend.dev>',
+      const res = await resend.emails.send({
+        from: 'Acme <onboarding@resend.dev>',
         to: user.email,
         subject: "Verify your email",
         react: EmailVerificationMail({ userEmail: user.email, verificationUrl: addressUrl.toString() }),
       });
-
-      // await sendVerificationMail(user.email, addressUrl)
     },
   },
   emailAndPassword: {
@@ -41,10 +39,7 @@ export const auth = betterAuth({
     emailOTP({
       expiresIn: 10 * 60,
       allowedAttempts: 3,
-      sendVerificationOnSignUp: true,
       async sendVerificationOTP({ email, otp, type }) {
-
-        // await sendEmailOTP(email, otp, "Reset Password")
         await resend.emails.send({
           from: 'Socialai <onboarding@resend.dev>',
           to: email,
