@@ -63,10 +63,10 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
 
     const result = await onSubmit(data)
     if (result.success) {
-      toast("Success!", {
+      toast.success("Success!", {
         description: isSignedIn
           ? "Welcome back! You've successfully signed in"
-          : "Account created! Welcome to SOCIALAI",
+          : "We have send you a verification email at your email address. Verify your account first. ",
       })
 
       if (isSignedIn) {
