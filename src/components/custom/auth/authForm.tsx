@@ -58,6 +58,25 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
     defaultValues: defaultValues as DefaultValues<T>,
   })
 
+
+  const socialSubmit = (provider: "google" | "facebook") => {
+    setPending(true)
+    setError(null)
+
+    authClient.signIn.social({
+      provider: provider,
+      callbackURL: "/"
+    }, {
+      onSuccess: () => {
+        setPending(false)
+      },
+      onError: ({ error }) => {
+        setPending(false)
+        setError(error.message)
+      }
+    })
+  }
+
   const submit: SubmitHandler<T> = async (data: T) => {
     setPending(true)
     setError(null)
@@ -117,11 +136,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
           {/* Social Login Buttons */}
           <div className="space-y-3 mb-6">
             <Button
-              onClick={async () => {
-                await authClient.signIn.social({
-                  provider: "google"
-                })
-              }}
+              onClick={() => socialSubmit("google")}
               type="button"
               variant="outline"
               className="w-full h-12 border-gray-300 flex items-center justify-center gap-3"
@@ -131,12 +146,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
             </Button>
 
             <Button
-              onClick={async () => {
-                await authClient.signIn.social({
-                  provider: "facebook",
-                  callbackURL: ""
-                })
-              }}
+              onClick={async () => socialSubmit("facebook")}
               type="button"
               variant="outline"
               className="w-full h-12 border-gray-300 flex items-center justify-center gap-3"
@@ -201,7 +211,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
                 disabled={pending}
                 className="w-full h-12 mt-4"
               >
-                {pending ? "Processing..." : isSignedIn ? "Log In" : "Create Account"}
+                {isSignedIn ? "Log In" : "Create Account"}
               </Button>
             </form>
           </Form>
@@ -221,6 +231,6 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
         </div>
       </div>
 
-    </div>
+    </div >
   )
 }
