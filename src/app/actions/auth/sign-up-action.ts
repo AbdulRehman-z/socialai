@@ -3,6 +3,7 @@
 import { auth } from "@/lib/auth";
 import { signupSchema } from "@/lib/validations";
 import { APIError } from "better-auth/api";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 
@@ -26,6 +27,7 @@ export const signupAction = async (formData: z.infer<typeof signupSchema>) => {
         password: password,
       }
     })
+
 
     return {
       success: true,
