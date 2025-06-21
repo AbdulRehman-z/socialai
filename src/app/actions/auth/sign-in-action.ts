@@ -3,6 +3,7 @@
 import { auth } from "@/lib/auth";
 import { signinSchema } from "@/lib/validations";
 import { APIError } from "better-auth/api";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 
