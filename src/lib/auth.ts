@@ -16,6 +16,9 @@ export const auth = betterAuth({
       ...schema
     }
   }),
+  verification: {
+    disableCleanup: false
+  },
   account: {
     accountLinking: {
       trustedProviders: ["facebook", "google"],
@@ -23,10 +26,10 @@ export const auth = betterAuth({
     },
   },
   socialProviders: {
-    // google: {
-    //   clientId: config.env.GOOGLE_CLIENT_ID,
-    //   clientSecret: config.env.GOOGLE_CLIENT_SECRET,
-    // },
+    google: {
+      clientId: config.env.GOOGLE_CLIENT_ID,
+      clientSecret: config.env.GOOGLE_CLIENT_SECRET,
+    },
     facebook: {
       enabled: true,
       redirectURI: "http://localhost:3000/api/auth/callback/facebook",
@@ -53,6 +56,7 @@ export const auth = betterAuth({
     enabled: true,
     autoSignIn: false,
     requireEmailVerification: true,
+
   },
   plugins: [
     emailOTP({
