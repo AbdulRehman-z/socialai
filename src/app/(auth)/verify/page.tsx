@@ -1,6 +1,8 @@
 import { RedirectTimer } from "@/components/custom/auth/redirectTimer"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { auth } from "@/lib/auth"
 import { AlertCircle, CheckCircle } from "lucide-react"
+import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 
 type PageProps = {
@@ -21,6 +23,14 @@ const getErrorMessage = (error: string): string => {
 }
 
 const VerifyPage = async ({ searchParams }: PageProps) => {
+  const session = await auth.api.getSession({
+    headers:await headers()
+  })
+  
+  if(!!session) {
+    redirect("/")
+  }
+  
   const { error } = await searchParams
 
   // If no error, this means verification was successful
