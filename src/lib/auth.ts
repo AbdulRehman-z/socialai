@@ -6,15 +6,34 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { resend, sendEmailOTP, sendVerificationMail } from "./mail";
 import OTPEmail from "@/components/custom/emails/otpEmail";
 import EmailVerificationMail from "@/components/custom/emails/emailVerificationMail";
+import { config } from "./config";
 
 export const auth = betterAuth({
+  appName: "Socialai",
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: {
       ...schema
     }
   }),
-  appName: "Socialai",
+  account: {
+    accountLinking: {
+      trustedProviders: ["facebook", "google"],
+      enabled: true
+    },
+  },
+  socialProviders: {
+    // google: {
+    //   clientId: config.env.GOOGLE_CLIENT_ID,
+    //   clientSecret: config.env.GOOGLE_CLIENT_SECRET,
+    // },
+    facebook: {
+      enabled: true,
+      redirectURI: "http://localhost:3000/api/auth/callback/facebook",
+      clientId: config.env.FACEBOOK_CLIENT_ID,
+      clientSecret: config.env.FACEBOOK_CLIENT_SECRET,
+    },
+  },
   emailVerification: {
     autoSignInAfterVerification: false,
     expiresIn: 60 * 60, // 60 minutes
