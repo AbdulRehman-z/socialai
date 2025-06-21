@@ -1,4 +1,4 @@
-import HomeView from "@/components/custom/views/home/homeView";
+import HomeView from "@/components/views/home/homeView";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Image from "next/image";
