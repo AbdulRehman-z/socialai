@@ -29,6 +29,8 @@ const VerifyPage = async ({ searchParams }: PageProps) => {
     // Option 1: Immediate redirect (uncomment if you want immediate redirect)
     // redirect("/sign-in")
 
+    
+
     // Option 2: Show success message with client-side redirect timer
     return (
       <div className="min-h-screen flex justify-center items-center p-4">
