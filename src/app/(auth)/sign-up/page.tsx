@@ -1,7 +1,7 @@
 
 import { signupAction } from "@/app/actions/auth/sign-up-action";
 import AuthForm from "@/components/custom/auth/authForm";
-import SignupView from "@/components/custom/views/auth/signupView";
+import SignupView from "@/components/views/auth/signupView";
 import { auth } from "@/lib/auth";
 import { signupSchema } from "@/lib/validations";
 import { headers } from "next/headers";
