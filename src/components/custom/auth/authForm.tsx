@@ -12,11 +12,12 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { type DefaultValues, type Path, type SubmitHandler, useForm, type UseFormReturn } from "react-hook-form"
-import { FaGithub } from "react-icons/fa"
+import { FaFacebook, FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
 import { toast } from "sonner"
 import type { z, ZodType } from "zod"
 import BrandPanel from "./brandPanel"
+import { authClient } from "@/lib/auth-client"
 
 type AuthFormProps<T extends z.ZodType<any, any, any>> = {
   type: "SIGN_UP" | "SIGN_IN"
@@ -116,6 +117,11 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
           {/* Social Login Buttons */}
           <div className="space-y-3 mb-6">
             <Button
+              onClick={async () => {
+                await authClient.signIn.social({
+                  provider: "google"
+                })
+              }}
               type="button"
               variant="outline"
               className="w-full h-12 border-gray-300 flex items-center justify-center gap-3"
@@ -125,12 +131,18 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
             </Button>
 
             <Button
+              onClick={async () => {
+                await authClient.signIn.social({
+                  provider: "facebook",
+                  callbackURL: ""
+                })
+              }}
               type="button"
               variant="outline"
               className="w-full h-12 border-gray-300 flex items-center justify-center gap-3"
             >
-              <FaGithub className="size-5" />
-              Github
+              <FaFacebook className="size-5 text-blue-500" />
+              Facebook
             </Button>
           </div>
 
