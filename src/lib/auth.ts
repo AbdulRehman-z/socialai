@@ -45,7 +45,7 @@ export const auth = betterAuth({
       const addressUrl = new URL(url)
       addressUrl.searchParams.set("callbackURL", "/verify")
       const res = await resend.emails.send({
-        from: 'Acme <onboarding@resend.dev>',
+        from: 'Socialai <onboarding@resend.dev>',
         to: user.email,
         subject: "Verify your email",
         react: EmailVerificationMail({ userEmail: user.email, verificationUrl: addressUrl.toString() }),
@@ -56,7 +56,6 @@ export const auth = betterAuth({
     enabled: true,
     autoSignIn: false,
     requireEmailVerification: true,
-
   },
   plugins: [
     emailOTP({
