@@ -101,12 +101,12 @@ const ResetPasswordView = () => {
       </div >
 
       {/* Right Panel - Brand */}
-      < div className="flex-1 min-h-screen items-center flex-col justify-center bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden" >
+      < div className="flex-1 min-h-screen items-center flex-col justify-center bg-gradient-to-br from-primary/90 via-primary to-primary/87 relative overflow-hidden" >
         {/* Background Elements */}
         < div className="absolute inset-0 opacity-10" >
-          <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-white/20 blur-xl" />
-          <div className="absolute top-40 right-32 w-24 h-24 rounded-full bg-white/15 blur-lg" />
-          <div className="absolute bottom-32 left-16 w-40 h-40 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-primary/20 blur-xl" />
+          <div className="absolute top-40 right-32 w-24 h-24 rounded-full bg-primary/15 blur-lg" />
+          <div className="absolute bottom-32 left-16 w-40 h-40 rounded-full bg-primary/10 blur-2xl" />
         </div >
 
         {/* Content */}
@@ -118,7 +118,7 @@ const ResetPasswordView = () => {
             className="max-w-md"
           >
             {/* Icon */}
-            <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-8 backdrop-blur-sm">
+            <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-8 backdrop-blur-sm">
               <Shield className="w-12 h-12 text-white" />
             </div>
 
