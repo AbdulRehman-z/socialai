@@ -15,12 +15,12 @@ const BrandPanel = () => {
   }, [])
 
   return (
-    <div className="h-full bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
+    <div className="h-full bg-gradient-to-br from-primary/90 via-primary to-primary/87 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-white/20 blur-xl" />
-        <div className="absolute top-40 right-32 w-24 h-24 rounded-full bg-white/15 blur-lg" />
-        <div className="absolute bottom-32 left-16 w-40 h-40 rounded-full bg-white/10 blur-2xl" />
+        <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-primary/20 blur-xl" />
+        <div className="absolute top-40 right-32 w-24 h-24 rounded-full bg-primary/15 blur-lg" />
+        <div className="absolute bottom-32 left-16 w-40 h-40 rounded-full bg-primary/10 blur-2xl" />
       </div>
 
       {/* Content */}
@@ -32,7 +32,7 @@ const BrandPanel = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-white rounded-2xl shadow-2xl p-6 w-80 h-64 relative"
+            className="bg-primary rounded-2xl shadow-2xl p-6 w-80 h-64 relative"
           >
             {/* Browser Header */}
             <div className="flex items-center gap-2 mb-4">
@@ -75,17 +75,17 @@ const BrandPanel = () => {
             className="absolute -left-16 top-8 space-y-4"
           >
             {/* SOCIALAI Logo */}
-            <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
+            <div className="w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center">
               <Image src="/logo.svg" alt="SOCIALAI" width={24} height={16} />
             </div>
 
             {/* Slack Icon */}
-            <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
+            <div className="w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center">
               <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded" />
             </div>
 
             {/* Google Icon */}
-            <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
+            <div className="w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center">
               <div className="w-6 h-6 bg-gradient-to-r from-red-500 to-yellow-500 rounded-full" />
             </div>
           </motion.div>
