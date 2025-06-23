@@ -90,8 +90,11 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
       })
 
       if (isSignedIn) {
+        console.log({ isSignedIn })
+
         router.push("/")
       } else {
+        console.log({ isSignedIn })
         router.push("/sign-in")
       }
     } else {
@@ -99,13 +102,6 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
     }
 
     setPending(false)
-  }
-
-  const togglePasswordVisibility = (fieldName: string) => {
-    setShowPassword((prev) => ({
-      ...prev,
-      [fieldName]: !prev[fieldName],
-    }))
   }
 
   return (
@@ -136,6 +132,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
           {/* Social Login Buttons */}
           <div className="space-y-3 mb-6">
             <Button
+              disabled={pending}
               onClick={() => socialSubmit("google")}
               type="button"
               variant="outline"
@@ -146,6 +143,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
             </Button>
 
             <Button
+              disabled={pending}
               onClick={async () => socialSubmit("facebook")}
               type="button"
               variant="outline"
@@ -162,7 +160,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">or continue with email</span>
+              <span className="px-2 text-gray-500">or continue with email</span>
             </div>
           </div>
 
@@ -181,6 +179,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
                           <div className="absolute left-3 top-1/2 -translate-y-1/2">{getFieldIcon(formField.name)}</div>
                           <Input
                             {...formField}
+                            disabled={pending}
                             type={FIELD_TYPES[formField.name as keyof typeof FIELD_TYPES]}
                             placeholder={FIELD_NAMES[formField.name as keyof typeof FIELD_NAMES]}
                             className="pl-10 pr-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
