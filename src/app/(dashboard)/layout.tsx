@@ -11,21 +11,10 @@ type DashboardLayoutProps = {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-
-    <ThemeProvider
-      enableColorScheme
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <SidebarProvider>
-        <DashboardSidebar />
-        <DashboardInset children={children} />
-      </SidebarProvider>
-      <Toaster />
-    </ThemeProvider>
-
+    <SidebarProvider>
+      <DashboardSidebar />
+      <DashboardInset children={children} />
+    </SidebarProvider>
   )
 }
 
