@@ -35,7 +35,6 @@ const DashboardSidebar = () => {
   const pathname = "Meetings"
   return (
     <Sidebar variant="floating" collapsible="icon">
-
       {/* Header */}
       <SidebarHeader>
         <SidebarMenu>

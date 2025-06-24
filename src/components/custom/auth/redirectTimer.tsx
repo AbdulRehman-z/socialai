@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
+import { Progress } from "@/components/ui/progress"
+import { motion } from "framer-motion"
 
 interface RedirectTimerProps {
   redirectUrl: string
   intervalMs: number
 }
 
-export const RedirectTimer = ({ redirectUrl, intervalMs }: RedirectTimerProps) => {
-  const [timeLeft, setTimeLeft] = useState(Math.floor(intervalMs / 1000))
+export function RedirectTimer({ redirectUrl, intervalMs }: RedirectTimerProps) {
+  const [timeLeft, setTimeLeft] = useState(intervalMs / 1000)
   const router = useRouter()
 
   useEffect(() => {
@@ -25,24 +26,18 @@ export const RedirectTimer = ({ redirectUrl, intervalMs }: RedirectTimerProps) =
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [router, redirectUrl])
+  }, [redirectUrl, router])
 
-  const handleRedirectNow = () => {
-    router.push(redirectUrl)
-  }
+  const progress = ((intervalMs / 1000 - timeLeft) / (intervalMs / 1000)) * 100
 
   return (
-    <div className="flex flex-col items-center space-y-3">
-      <p className="text-sm text-gray-600 text-center">
-        Redirecting to sign-in in: <span className="font-semibold">{timeLeft}</span> seconds
-      </p>
-
-      <Button
-        onClick={handleRedirectNow}
-        size="sm"
-      >
-        Go to Sign-in Now
-      </Button>
-    </div>
+    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="w-full space-y-3">
+      <div className="text-center">
+        <p className="text-sm text-muted-foreground">
+          Redirecting in <span className="font-semibold text-foreground">{timeLeft}</span> seconds
+        </p>
+      </div>
+      <Progress value={progress} className="h-2" />
+    </motion.div>
   )
 }

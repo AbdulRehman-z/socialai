@@ -44,6 +44,8 @@ const DashboardSidebarNavUser = () => {
     })
   }
 
+  console.log({ data })
+
   if (isPending) {
     return (
       <div className="flex items-center space-x-4">
