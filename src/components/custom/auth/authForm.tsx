@@ -140,7 +140,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
           {/* Social Login Buttons */}
           <div className="space-y-3 mb-8">
             <Button
-              disabled={pending}
+              disabled={pending || socialPending.length !== 0}
               onClick={() => socialSubmit("google")}
               type="button"
               variant="outline"
@@ -151,7 +151,7 @@ export default function SplitScreenAuthForm<T extends ZodType<any, any, any>>({
             </Button>
 
             <Button
-              disabled={pending || socialPending}
+              disabled={pending || socialPending.length !== 0}
               onClick={() => socialSubmit("facebook")}
               type="button"
               variant="outline"
