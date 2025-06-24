@@ -1,6 +1,7 @@
 export const config = {
   env: {
     NODE_ENV: process.env.NODE_ENV!,
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL!,
     NEXT_PUBLIC_API_ENDPOINT: process.env.NEXT_PUBLIC_API_ENDPOINT!,
     NEXT_PUBLIC_PROD_API_ENDPOINT: process.env.NEXT_PUBLIC_PROD_API_ENDPOINT!,
     imagekit: {
