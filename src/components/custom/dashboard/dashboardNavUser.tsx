@@ -6,7 +6,8 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar"
+} from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,20 +16,18 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
-import { CreditCardIcon, LogOutIcon, Menu, UserCircle } from "lucide-react"
+} from "@/components/ui/sidebar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { authClient } from "@/lib/auth-client";
 import { getInitials } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
-import { error } from "better-auth/api";
-import { Button } from "@/components/ui/button";
-import { redirect, useRouter } from "next/navigation";
+import { CreditCardIcon, LogOutIcon, Menu, UserCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const DashboardSidebarNavUser = () => {
   const session = authClient.useSession()
@@ -44,15 +43,13 @@ const DashboardSidebarNavUser = () => {
     })
   }
 
-  console.log({ data })
-
   if (isPending) {
     return (
       <div className="flex items-center space-x-4">
-        <Skeleton className="h-12 w-12 rounded-full" />
+        <Skeleton className="size-11 rounded-full" />
         <div className="space-y-2">
-          <Skeleton className="h-4 w-[180px]" />
-          <Skeleton className="h-4 w-[180px]" />
+          <Skeleton className="h-4 w-[150px]" />
+          <Skeleton className="h-4 w-[150px]" />
         </div>
       </div>
     )
