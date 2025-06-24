@@ -24,6 +24,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { TooltipWrapper } from "../custom/tooltipWrapper"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -261,21 +262,23 @@ function SidebarTrigger({
   const { toggleSidebar, state, isMobile } = useSidebar()
 
   return (
-    <Button
-      data-sidebar="trigger"
-      data-slot="sidebar-trigger"
-      variant="ghost"
-      size="icon"
-      className={cn("size-7", className)}
-      onClick={(event) => {
-        onClick?.(event)
-        toggleSidebar()
-      }}
-      {...props}
-    >
-      {state === "collapsed" || isMobile ? <PanelLeftOpenIcon className="size-5" /> : <PanelRightOpenIcon className="size-5" />}
-      <span className="sr-only">Toggle Sidebar</span>
-    </Button>
+    <TooltipWrapper tooltipContent="Toggle Sidebar">
+      <Button
+        data-sidebar="trigger"
+        data-slot="sidebar-trigger"
+        variant="ghost"
+        size="icon"
+        className={cn("size-7", className)}
+        onClick={(event) => {
+          onClick?.(event)
+          toggleSidebar()
+        }}
+        {...props}
+      >
+        {state === "collapsed" || isMobile ? <PanelLeftOpenIcon className="size-5" /> : <PanelRightOpenIcon className="size-5" />}
+        <span className="sr-only">Toggle Sidebar</span>
+      </Button>
+    </TooltipWrapper>
   )
 }
 
