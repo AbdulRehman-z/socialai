@@ -30,9 +30,10 @@ const secondSection = [
 ]
 
 const DashboardSidebar = () => {
-  // const pathname = usePathname()
-  // console.log(pathname)
-  const pathname = "Meetings"
+  const pathname = usePathname()
+
+  console.log({ pathname })
+
   return (
     <Sidebar variant="floating" collapsible="icon">
       {/* Header */}
@@ -64,13 +65,13 @@ const DashboardSidebar = () => {
             <SidebarMenu>
               {firstSection.map((item) => (
                 <SidebarMenuItem key={item.href} className="py-[3px]">
-                  <SidebarMenuButton tooltip={item.label} className={cn("h-11", pathname === item.label ? "bg-primary text-sidebar-foreground hover:bg-primary/90" : "")}
+                  <SidebarMenuButton tooltip={item.label} className={cn("h-11", pathname === item.href ? "bg-primary text-sidebar-foreground hover:bg-primary/90" : "")}
                     asChild
-                  // isActive={pathname === item.label}
+                  // isActive={pathname === item.href}
                   >
                     <Link href={item.href}>
-                      <item.icon className={cn("size-5", pathname === item.label ? "text-primary-foreground" : "")} />
-                      <span className={cn("tracking-tight font-semibold", pathname === item.label ? "text-primary-foreground" : "")}>
+                      <item.icon className={cn("size-5", pathname === item.href ? "text-primary-foreground" : "")} />
+                      <span className={cn("tracking-tight font-semibold", pathname === item.href ? "text-primary-foreground" : "")}>
                         {item.label}
                       </span>
                     </Link>
@@ -90,12 +91,12 @@ const DashboardSidebar = () => {
             <SidebarMenu>
               {secondSection.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton tooltip={item.label} className="h-12" asChild
-                    isActive={pathname === item.label}
+                  <SidebarMenuButton tooltip={item.label} className={cn("h-11", pathname === item.href ? "bg-primary text-sidebar-foreground hover:bg-primary/90" : "")}
+                    asChild
                   >
                     <Link href={item.href}>
-                      <item.icon className={cn("size-5", pathname === item.label ? "text-primary" : "")} />
-                      <span className={cn("tracking-tight font-semibold", pathname === item.label ? "text-primary/90" : "")}>
+                      <item.icon className={cn("size-5", pathname === item.href ? "text-primary" : "")} />
+                      <span className={cn("tracking-tight font-semibold", pathname === item.href ? "text-primary/90" : "")}>
                         {item.label}
                       </span>
                     </Link>
