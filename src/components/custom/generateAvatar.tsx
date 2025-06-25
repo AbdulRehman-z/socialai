@@ -13,17 +13,20 @@ export const GeneratedAvatar = ({ seed, variant, className }: GeneratedAvatarPro
 
   if (variant === "botttsNeutral") {
     avatar = createAvatar(botttsNeutral, {
-      seed: seed,
+      seed
     })
-  } else if (variant === "initials") {
+  } else {
+    console.log("initials")
     avatar = createAvatar(initials, {
       seed: seed,
+      fontSize: 42,
+      fontWeight: 500
     })
   }
 
   return (
-    <Avatar>
-      <AvatarImage>{avatar?.toDataUri()}</AvatarImage>
+    <Avatar className="size-13">
+      <AvatarImage src={avatar.toDataUri()} />
       <AvatarFallback>{seed.charAt(0).toUpperCase()}</AvatarFallback>
     </Avatar>
   )
