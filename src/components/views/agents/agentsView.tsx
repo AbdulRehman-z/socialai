@@ -1,24 +1,23 @@
 "use client"
 
-import { GenericError } from "@/components/custom/genericError"
-import { GenericLoader } from "@/components/custom/genericLoader"
-import { ResponsiveDialog } from "@/components/custom/responsiveDialog"
-import { Button } from "@/components/ui/button"
+import { columns } from "@/components/custom/agents/columns"
+import { DataTable } from "@/components/custom/agents/dataTable"
+import { GenericEmptyState } from "@/components/custom/genericEmptyState"
 import { useTRPC } from "@/trpc/client"
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query"
+import { useSuspenseQuery } from "@tanstack/react-query"
 
-export const AgentsView = () => {
+
+
+export const AgentsView = async () => {
   const trpc = useTRPC()
-
   // the data won't be fetched on the client side(browser), it's already prefetched on the server.
   // so useSuspenseQuery is basically using the cached data already prefetched. If there is not prefetched data, it will fallback to useQuery().
   const { data } = useSuspenseQuery(trpc.agents.getMany.queryOptions())
 
   return (
     <div>
-      <pre>
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <DataTable columns={columns} data={data} />
+      {data.length === 0 && <GenericEmptyState title="Create your first agent" description="Create an agent to join meeting. Each agent will follow your instructions and can interact with participants during the call" />}
     </div>
   )
 }
