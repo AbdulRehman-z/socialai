@@ -6,6 +6,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { resend, sendEmailOTP, sendVerificationMail } from "./mail";
 import OTPEmail from "@/components/custom/emails/otpEmail";
 import EmailVerificationMail from "@/components/custom/emails/emailVerificationMail";
+import * as authSchema from "@/db/schemas/auth-schema"
 import { config } from "./config";
 
 export const auth = betterAuth({
@@ -13,7 +14,7 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: {
-      ...schema
+      ...authSchema
     }
   }),
   verification: {
