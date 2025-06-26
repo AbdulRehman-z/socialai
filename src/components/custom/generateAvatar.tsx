@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 type GeneratedAvatarProps = {
   seed: string,
   variant: "botttsNeutral" | "initials"
-  className: string,
+  className?: string,
 }
 
 export const GeneratedAvatar = ({ seed, variant, className }: GeneratedAvatarProps) => {
@@ -25,7 +25,7 @@ export const GeneratedAvatar = ({ seed, variant, className }: GeneratedAvatarPro
   }
 
   return (
-    <Avatar className="size-13">
+    <Avatar className={className}>
       <AvatarImage src={avatar.toDataUri()} />
       <AvatarFallback>{seed.charAt(0).toUpperCase()}</AvatarFallback>
     </Avatar>
