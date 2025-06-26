@@ -32,8 +32,6 @@ const secondSection = [
 const DashboardSidebar = () => {
   const pathname = usePathname()
 
-  console.log({ pathname })
-
   return (
     <Sidebar variant="floating" collapsible="icon">
       {/* Header */}
@@ -65,7 +63,9 @@ const DashboardSidebar = () => {
             <SidebarMenu>
               {firstSection.map((item) => (
                 <SidebarMenuItem key={item.href} className="py-[3px]">
-                  <SidebarMenuButton tooltip={item.label} className={cn("h-11", pathname === item.href ? "bg-primary text-sidebar-foreground hover:bg-primary/90" : "")}
+                  <SidebarMenuButton tooltip={item.label}
+                    className={cn("h-11", pathname.includes(item.href) ?
+                      "bg-primary text-sidebar-foreground hover:bg-primary/90" : "")}
                     asChild
                   // isActive={pathname === item.href}
                   >
@@ -91,7 +91,9 @@ const DashboardSidebar = () => {
             <SidebarMenu>
               {secondSection.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton tooltip={item.label} className={cn("h-11", pathname === item.href ? "bg-primary text-sidebar-foreground hover:bg-primary/90" : "")}
+                  <SidebarMenuButton tooltip={item.label}
+                    className={cn("h-11", pathname.includes(item.href)
+                      ? "bg-primary text-sidebar-foreground hover:bg-primary/90" : "")}
                     asChild
                   >
                     <Link href={item.href}>
