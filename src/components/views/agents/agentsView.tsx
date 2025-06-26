@@ -7,8 +7,10 @@ import { EmptyAgentState } from "@/components/custom/emptyAgentState"
 import { useAgentsFilters } from "@/hooks/agents/use-agents-filters"
 import { useTRPC } from "@/trpc/client"
 import { useSuspenseQuery } from "@tanstack/react-query"
+import { useRouter } from "next/navigation"
 
 export const AgentsView = () => {
+  const router = useRouter()
   const [filters, setFilters] = useAgentsFilters()
   const trpc = useTRPC()
   // the data won't be fetched on the client side(browser), it's already prefetched on the server.
@@ -17,11 +19,9 @@ export const AgentsView = () => {
     ...filters,
   }))
 
-  console.log({ filters })
-
   return (
     <div>
-      <DataTable columns={columns} data={data.items} />
+      <DataTable onRowClick={(row) => router.push(`/agents/${row.id}`)} columns={columns} data={data.items} />
       <DataPagination page={filters.page} totalPages={data.totalPages
       } onPageChange={(page) => setFilters({ page })} />
       {data.items.length === 0 && <EmptyAgentState title="Create your first agent" description="Create an agent to join meeting. Each agent will follow your instructions and can interact with participants during the call" />}
