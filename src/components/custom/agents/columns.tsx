@@ -16,7 +16,7 @@ export const columns: ColumnDef<AgentGetOne>[] = [
           <GeneratedAvatar
             variant="botttsNeutral"
             seed={row.original.name}
-            className="size-6"
+            className="size-5"
           />
           <span className="font-semibold capitalize">{row.original.name}</span>
         </div>
