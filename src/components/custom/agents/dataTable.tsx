@@ -34,7 +34,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-lg border bg-background overflow-hidden">
+    <div className="rounded-lg border bg-background overflow-hidden mx-3 md:mx-8">
       <Table>
         <TableBody>
           {table.getRowModel().rows?.length ? (
