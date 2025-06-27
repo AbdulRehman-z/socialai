@@ -13,3 +13,8 @@ export const agentsGetManySchema = z.object({
     .default(DEFAULT_PAGE_SIZE),
   search: z.string().nullish()
 })
+
+
+export const agentsUpdateSchema = agentsInsertSchema.extend({
+  id: z.string().min(1, { message: "Id is required" }),
+})
