@@ -70,8 +70,8 @@ const DashboardSidebar = () => {
                   // isActive={pathname === item.href}
                   >
                     <Link href={item.href}>
-                      <item.icon className={cn("size-5", pathname === item.href ? "text-primary-foreground" : "")} />
-                      <span className={cn("tracking-tight font-semibold", pathname === item.href ? "text-primary-foreground" : "")}>
+                      <item.icon className={cn("size-5", pathname.includes(item.href) ? "text-primary-foreground" : "")} />
+                      <span className={cn("tracking-tight font-semibold", pathname.includes(item.href) ? "text-primary-foreground" : "")}>
                         {item.label}
                       </span>
                     </Link>
@@ -97,8 +97,8 @@ const DashboardSidebar = () => {
                     asChild
                   >
                     <Link href={item.href}>
-                      <item.icon className={cn("size-5", pathname === item.href ? "text-primary" : "")} />
-                      <span className={cn("tracking-tight font-semibold", pathname === item.href ? "text-primary/90" : "")}>
+                      <item.icon className={cn("size-5", pathname.includes(item.href) ? "text-primary-foreground" : "")} />
+                      <span className={cn("tracking-tight font-semibold", pathname.includes(item.href) ? "text-primary-foreground" : "")}>
                         {item.label}
                       </span>
                     </Link>
