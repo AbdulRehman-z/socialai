@@ -2,8 +2,8 @@
 
 import { columns } from "@/components/custom/agents/columns"
 import { DataPagination } from "@/components/custom/agents/dataPagination"
-import { DataTable } from "@/components/custom/agents/dataTable"
-import { EmptyAgentState } from "@/components/custom/emptyAgentState"
+import { DataTable } from "@/components/custom/dataTable"
+import { GenericEmptyState } from "@/components/custom/genericEmptyState"
 import { useAgentsFilters } from "@/hooks/agents/use-agents-filters"
 import { useTRPC } from "@/trpc/client"
 import { useSuspenseQuery } from "@tanstack/react-query"
@@ -20,11 +20,11 @@ export const AgentsView = () => {
   }))
 
   return (
-    <div>
+    <>
       <DataTable onRowClick={(row) => router.push(`/agents/${row.id}`)} columns={columns} data={data.items} />
       <DataPagination page={filters.page} totalPages={data.totalPages
       } onPageChange={(page) => setFilters({ page })} />
-      {data.items.length === 0 && <EmptyAgentState title="Create your first agent" description="Create an agent to join meeting. Each agent will follow your instructions and can interact with participants during the call" />}
-    </div>
+      {data.items.length === 0 && <GenericEmptyState title="Create your first agent" description="Create an agent to join meeting. Each agent will follow your instructions and can interact with participants during the call" dialog="agent" />}
+    </>
   )
 }
