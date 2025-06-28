@@ -1,6 +1,6 @@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { agentsInsertSchema } from "@/modules/agents/schema"
-import { AgentGetOne } from "@/modules/agents/types"
+import { agentsInsertSchema } from "@/modules/agents/server/schema"
+import { AgentGetOne } from "@/modules/agents/server/types"
 import { useTRPC } from "@/trpc/client"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
