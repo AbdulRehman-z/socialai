@@ -43,7 +43,7 @@ export const AgentIdView = ({ agentId }: AgentIdProps) => {
 
   const handleRemoveAgent = async () => {
     const ok = await confirmRemove()
-    console.log({ ok })
+
     if (!ok) return
     await removeAgent.mutateAsync({ id: agentId })
   }
