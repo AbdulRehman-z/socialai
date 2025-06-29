@@ -65,16 +65,24 @@ export const meetingsRouter = createTRPCRouter({
   /////////////////////////////////////////////////
   // GET MANY
   getMany: protectedBaseProcedure.input(meetingsGetManySchema).query(async ({ input, ctx }) => {
-    const { page, pageSize, search } = input
+    const { page, pageSize, search, agentId, status } = input
 
     const data = await db.select({
       ...getTableColumns(meetings),
       agent: agents,
-      duration: sql<number>`EXTRACT(EPOCH FROM (ended_at - started_at))`.as("duration")
+      duration: sql<number | null>`
+        CASE
+          WHEN ended_at IS NOT NULL AND started_at IS NOT NULL
+          THEN EXTRACT(EPOCH FROM (ended_at - started_at))
+          ELSE NULL
+        END
+      `.as("duration")
     }).
       from(meetings).
       innerJoin(agents, eq(meetings.agentId, agents.id)).
       where(and(eq(meetings.userId, ctx.auth.user.id),
+        agentId ? eq(meetings.agentId, agentId) : undefined,
+        status ? eq(meetings.status, status) : undefined,
         search ? ilike(meetings.name, `%${search}%`) : undefined))
       .orderBy(desc(meetings.createdAt), desc(meetings.id))
       .limit(pageSize)
@@ -89,6 +97,7 @@ export const meetingsRouter = createTRPCRouter({
       from(meetings).
       innerJoin(agents, eq(meetings.agentId, agents.id)).
       where(and(eq(meetings.userId, ctx.auth.user.id),
+        eq(meetings.agentId, agentId),
         search ? ilike(meetings.name, `%${search}%`) : undefined))
 
     const totalPages = Math.ceil(total.count / pageSize)
