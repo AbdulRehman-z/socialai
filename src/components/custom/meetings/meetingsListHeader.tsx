@@ -1,12 +1,29 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { PlusIcon } from "lucide-react"
+import { CircleXIcon, PlusIcon } from "lucide-react"
 import { useState } from "react"
 import { NewMeetingDialog } from "./newMeetingsDialog"
+import { MeetingsSearchFilters } from "./meetingsSearchFilters"
+import { StatusFilter } from "../statusFilter"
+import { useMeetingsFilters } from "@/hooks/meetings/use-meetings-filters"
+import { AgentsIdFilter } from "./agentsIdFilter"
 
 export const MeetingsListsHeader = () => {
   const [openDialog, setOpenDialog] = useState(false)
+  const [filters, setFilters] = useMeetingsFilters()
+
+  const areFiltersModified = !!filters.agentId || !!filters.agentId
+    || !!filters.status
+
+  const resetFilters = () => {
+    setFilters({
+      page: 1,
+      search: "",
+      status: null,
+      agentId: ""
+    })
+  }
 
   return (
     <>
@@ -20,6 +37,15 @@ export const MeetingsListsHeader = () => {
             <PlusIcon />
             New Meeting
           </Button>
+        </div>
+        <div className="p-1 flex items-center gap-x-4">
+          <MeetingsSearchFilters />
+          <StatusFilter />
+          <AgentsIdFilter />
+          {areFiltersModified && <Button size={"sm"} onClick={resetFilters}>
+            <CircleXIcon />
+            Clear
+          </Button>}
         </div>
       </div>
     </>
