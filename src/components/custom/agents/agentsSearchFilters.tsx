@@ -2,8 +2,6 @@ import { Input } from "@/components/ui/input"
 import { useAgentsFilters } from "@/hooks/agents/use-agents-filters"
 import { SearchIcon } from "lucide-react"
 
-
-
 export const AgentsSearchFilters = () => {
   const [filters, setFilters] = useAgentsFilters()
 
