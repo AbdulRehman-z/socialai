@@ -1,7 +1,7 @@
 "use client"
 
 import { columns } from "@/components/custom/agents/columns"
-import { DataPagination } from "@/components/custom/agents/dataPagination"
+import { DataPagination } from "@/components/custom/dataPagination"
 import { DataTable } from "@/components/custom/dataTable"
 import { GenericEmptyState } from "@/components/custom/genericEmptyState"
 import { useAgentsFilters } from "@/hooks/agents/use-agents-filters"
