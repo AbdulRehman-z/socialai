@@ -45,7 +45,7 @@ export const MeetingsForm = ({ initialValues, onCancel, onSuccess }: MeetingForm
       }
 
       onSuccess?.()
-      router.push(`/meetings/${data.id}`)
+      // router.push(`/meetings/${data.id}`)
     },
     onError: (error) => {
       toast.error(error.message)
@@ -131,7 +131,7 @@ export const MeetingsForm = ({ initialValues, onCancel, onSuccess }: MeetingForm
                         </div>
                       )
                     }))}
-                    isSearchable={agents.isPending}
+                    isSearchable={agents.isLoading}
                     placeholder="Search agent..."
                     value={field.value}
                     onSelect={field.onChange}
