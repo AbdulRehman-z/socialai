@@ -1,9 +1,9 @@
 import { AgentsListsHeader } from "@/components/custom/agents/agentsListHeader"
-import { loadSearchParams } from "@/components/custom/agents/params"
 import { GenericError } from "@/components/custom/genericError"
 import { GenericLoader } from "@/components/custom/genericLoader"
 import { AgentsView } from "@/components/views/agents/agentsView"
 import { auth } from "@/lib/auth"
+import { loadSearchParams } from "@/modules/agents/server/params"
 import { getQueryClient, trpc } from "@/trpc/server"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 import { headers } from "next/headers"
@@ -16,7 +16,6 @@ import { ErrorBoundary } from "react-error-boundary"
 type AgentsPageProps = {
   params: Promise<SearchParams>
 }
-
 
 const AgentsPage = async ({ params }: AgentsPageProps) => {
   const session = await auth.api.getSession({
@@ -44,9 +43,7 @@ const AgentsPage = async ({ params }: AgentsPageProps) => {
           </ErrorBoundary>
         </Suspense>
       </HydrationBoundary>
-
     </>
-
   )
 }
 
