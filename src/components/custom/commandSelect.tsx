@@ -24,10 +24,10 @@ export const CommandSelect = ({ options, onSelect, isSearchable, onSearch, value
 
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen);
-    
-    if (!newOpen && onSearch) {
-      onSearch("");
-    }
+    onSearch?.("")
+    // if (!newOpen && onSearch) {
+    //   onSearch("");
+    // }
   }
 
   return (
