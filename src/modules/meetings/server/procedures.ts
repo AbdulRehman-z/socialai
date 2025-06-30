@@ -97,7 +97,7 @@ export const meetingsRouter = createTRPCRouter({
       from(meetings).
       innerJoin(agents, eq(meetings.agentId, agents.id)).
       where(and(eq(meetings.userId, ctx.auth.user.id),
-        eq(meetings.agentId, agentId),
+        agentId ? eq(meetings.agentId, agentId) : undefined,
         search ? ilike(meetings.name, `%${search}%`) : undefined))
 
     const totalPages = Math.ceil(total.count / pageSize)
@@ -107,5 +107,23 @@ export const meetingsRouter = createTRPCRouter({
       total: total.count,
       totalPages
     }
+  }),
+
+  //////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  // REMOVE
+  remove: protectedBaseProcedure.input(z.object({ id: z.string() })).mutation(async ({ input, ctx }) => {
+    const [removeMeeting] = await db.delete(meetings)
+      .where(and(eq(meetings.id, input.id),
+        eq(meetings.userId, ctx.auth.user.id))).returning()
+
+    if (!removeMeeting) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Failed to delete"
+      })
+    }
+
+    return removeMeeting
   }),
 })
