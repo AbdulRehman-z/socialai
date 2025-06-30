@@ -24,7 +24,7 @@ export const meetingsGetManySchema = z.object({
     MeetingStatus.COMPLETED,
     MeetingStatus.PROCESSING,
     MeetingStatus.UPCOMING
-  ]).nullable()
+  ]).nullish()
 })
 
 
