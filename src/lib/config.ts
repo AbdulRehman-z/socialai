@@ -21,5 +21,7 @@ export const config = {
       QSTASH_TOKEN: process.env.QSTASH_TOKEN!,
     },
     RESEND_API_KEY: process.env.RESEND_API_KEY!,
+    STREAM_API_KEY: process.env.STREAM_API_KEY!,
+    STREAM_API_SECRET: process.env.STREAM_API_SECRET!,
   },
 };
