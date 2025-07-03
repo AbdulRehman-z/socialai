@@ -22,7 +22,7 @@ export const MeetingsView = () => {
     <>
       <DataTable data={meetings.items} columns={columns} onRowClick={(row) => router.push(`/meetings/${row.id}`)} />
       <DataPagination totalPages={meetings.totalPages} page={filters.page} onPageChange={(value) => setFilters({ page: value })} />
-      {meetings.items.length === 0 && <GenericEmptyState dialog="meeting" title="No meetings found"
+      {meetings.items.length === 0 && <GenericEmptyState type="meeting" title="No meetings found"
         description="Schedule a meeting to connect with others.Each meeting lets you collaborate,interact and share your ideas with participants in realtime" />}
     </>
   );
