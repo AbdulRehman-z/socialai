@@ -8,6 +8,7 @@ import { MeetingsSearchFilters } from "./meetingsSearchFilters"
 import { StatusFilter } from "../statusFilter"
 import { useMeetingsFilters } from "@/hooks/meetings/use-meetings-filters"
 import { AgentsIdFilter } from "./agentsIdFilter"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 export const MeetingsListsHeader = () => {
   const [openDialog, setOpenDialog] = useState(false)
@@ -38,15 +39,18 @@ export const MeetingsListsHeader = () => {
             New Meeting
           </Button>
         </div>
-        <div className="p-1 flex items-center gap-x-4">
-          <MeetingsSearchFilters />
-          <StatusFilter />
-          <AgentsIdFilter />
-          {areFiltersModified && <Button size={"sm"} onClick={resetFilters}>
-            <CircleXIcon />
-            Clear
-          </Button>}
-        </div>
+        <ScrollArea className="">
+          <div className="py-1 m-1 flex items-center gap-x-4">
+            <MeetingsSearchFilters />
+            <StatusFilter />
+            <AgentsIdFilter />
+            {areFiltersModified && <Button size={"sm"} onClick={resetFilters}>
+              <CircleXIcon />
+              Clear
+            </Button>}
+          </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </div>
     </>
   )
