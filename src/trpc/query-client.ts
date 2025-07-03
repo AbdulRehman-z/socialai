@@ -7,6 +7,7 @@ export function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
+
         staleTime: 30 * 1000,
         retry: 0 // In dev mode
       },
