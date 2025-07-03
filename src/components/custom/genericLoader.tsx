@@ -2,7 +2,7 @@ import { Loader2Icon } from "lucide-react"
 
 type LoaderProps = {
   title: string,
-  description: string
+  description?: string
 }
 
 export const GenericLoader = ({ title, description }: LoaderProps) => {
@@ -12,7 +12,7 @@ export const GenericLoader = ({ title, description }: LoaderProps) => {
         <Loader2Icon className="size-7 animate-spin text-primary" />
         <div className="flex flex-col items-center justify-center gap-y-2">
           <h1 className="text-xl font-semibold">{title}</h1>
-          <p className="text-sm text-muted-foreground">{description}</p>
+          {description && <p className="text-sm text-muted-foreground">{description}</p>}
         </div>
       </div>
     </div>
