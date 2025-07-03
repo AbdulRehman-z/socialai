@@ -4,15 +4,19 @@ import { agentsGetManySchema, agentsInsertSchema, agentsUpdateSchema } from "@/m
 import { z } from "zod";
 import { and, count, desc, eq, getTableColumns, ilike, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
+import { streamVideo } from "@/lib/stream";
+import { Avatar } from "@/components/ui/avatar";
+import { generateAvatarUri } from "@/lib/avatar";
 
 export const agentsRouter = createTRPCRouter({
   //////////////////////////////////////////////////
   /////////////////////////////////////////////////
   // UPDATE
   update: protectedBaseProcedure.input(agentsUpdateSchema).mutation(async ({ input, ctx }) => {
+    const { user } = ctx.auth;
 
-    console.log({ input })
-    const [updateAgent] = await db.update(agents).set(input).where(and(eq(agents.id, input.id), eq(agents.userId, ctx.auth.user.id))).returning()
+    const { id } = input;
+    const [updateAgent] = await db.update(agents).set(input).where(and(eq(agents.id, id), eq(agents.userId, user.id))).returning()
 
     if (!updateAgent) {
       throw new TRPCError({
@@ -28,8 +32,9 @@ export const agentsRouter = createTRPCRouter({
   /////////////////////////////////////////////////
   // REMOVE
   remove: protectedBaseProcedure.input(z.object({ id: z.string() })).mutation(async ({ input, ctx }) => {
+    const { user } = ctx.auth;
     const { id } = input;
-    const [removedAgent] = await db.delete(agents).where(and(eq(agents.id, id), eq(agents.userId, ctx.auth.user.id))).returning();
+    const [removedAgent] = await db.delete(agents).where(and(eq(agents.id, id), eq(agents.userId, user.id))).returning();
 
     if (!removedAgent) {
       throw new TRPCError({
@@ -44,13 +49,18 @@ export const agentsRouter = createTRPCRouter({
   //////////////////////////////////////////////////
   /////////////////////////////////////////////////
   // GET ONE
-  getOne: protectedBaseProcedure.input(z.object({ id: z.string() })).query(async ({ input }) => {
+  getOne: protectedBaseProcedure.input(z.object({ id: z.string() })).query(async ({ input, ctx }) => {
+    const { user } = ctx.auth;
+
     const [existingAgent] = await db.select(
       {
         meetings: sql<number>`5`,
         ...getTableColumns(agents)
       }
-    ).from(agents).where(eq(agents.id, input.id))
+    ).from(agents).where(and(
+      eq(agents.id, input.id),
+      eq(agents.userId, user.id)
+    ))
 
     if (!existingAgent) {
       throw new TRPCError({
@@ -67,13 +77,14 @@ export const agentsRouter = createTRPCRouter({
   // GET MANY
   getMany: protectedBaseProcedure.input(agentsGetManySchema).query(async ({ input, ctx }) => {
     const { page, pageSize, search } = input
+    const { user } = ctx.auth;
 
     const data = await db.select({
       meetings: sql<number>`5`,
       ...getTableColumns(agents)
     }).
       from(agents)
-      .where(and(eq(agents.userId, ctx.auth.user.id),
+      .where(and(eq(agents.userId, user.id),
         search ? ilike(agents.name, `%${search}%`) : undefined))
       .orderBy(desc(agents.createdAt), desc(agents.id))
       .limit(pageSize)
@@ -86,7 +97,7 @@ export const agentsRouter = createTRPCRouter({
       count: count()
     }).
       from(agents).
-      where(and(eq(agents.userId, ctx.auth.user.id),
+      where(and(eq(agents.userId, user.id),
         search ? ilike(agents.name, `%${search}%`) : undefined))
 
     const totalPages = Math.ceil(total.count / pageSize)
@@ -102,12 +113,13 @@ export const agentsRouter = createTRPCRouter({
   /////////////////////////////////////////////////
   // CREATE ONE
   create: protectedBaseProcedure.input(agentsInsertSchema).mutation(async ({ ctx, input }) => {
+    const { user } = ctx.auth;
+
     const [data] = await db.insert(agents).values({
       ...input,
-      userId: ctx.auth.user.id
+      userId: user.id
     }).returning()
 
     return data
   })
-
 })
