@@ -16,7 +16,6 @@ export const GeneratedAvatar = ({ seed, variant, className }: GeneratedAvatarPro
       seed
     })
   } else {
-    console.log("initials")
     avatar = createAvatar(initials, {
       seed: seed,
       fontSize: 42,
